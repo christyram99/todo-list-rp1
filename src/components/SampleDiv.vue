@@ -44,7 +44,7 @@ export default {
       console.log('called add task')
       this.tasks.push({
         id: this.taskId,
-        text: 'Task ' + ( this.taskId + 1 )
+        text: 'Task ' + (this.taskId + 1)
       })
 
       this.taskId++
