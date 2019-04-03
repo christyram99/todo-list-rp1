@@ -19,12 +19,12 @@
         <span style="opacity: 0.7; font-weight: 500;"> 0 Tasks. </span>
       </div>
     </div>
-    <br>
+
     <div class="stable-div">
-      <img @drop="drop" @dragover="drag_over" width="40" height="40" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8Zz4KCTxnPgoJCTxnPgoJCQk8cG9seWdvbiBwb2ludHM9IjM1My41NzQsMTc2LjUyNiAzMTMuNDk2LDE3NS4wNTYgMzA0LjgwNyw0MTIuMzQgMzQ0Ljg4NSw0MTMuODA0ICAgICIgZmlsbD0iIzAwMDAwMCIvPgoJCQk8cmVjdCB4PSIyMzUuOTQ4IiB5PSIxNzUuNzkxIiB3aWR0aD0iNDAuMTA0IiBoZWlnaHQ9IjIzNy4yODUiIGZpbGw9IiMwMDAwMDAiLz4KCQkJPHBvbHlnb24gcG9pbnRzPSIyMDcuMTg2LDQxMi4zMzQgMTk4LjQ5NywxNzUuMDQ5IDE1OC40MTksMTc2LjUyIDE2Ny4xMDksNDEzLjgwNCAgICAiIGZpbGw9IiMwMDAwMDAiLz4KCQkJPHBhdGggZD0iTTE3LjM3OSw3Ni44Njd2NDAuMTA0aDQxLjc4OUw5Mi4zMiw0OTMuNzA2QzkzLjIyOSw1MDQuMDU5LDEwMS44OTksNTEyLDExMi4yOTIsNTEyaDI4Ni43NCAgICAgYzEwLjM5NCwwLDE5LjA3LTcuOTQ3LDE5Ljk3Mi0xOC4zMDFsMzMuMTUzLTM3Ni43MjhoNDIuNDY0Vjc2Ljg2N0gxNy4zNzl6IE0zODAuNjY1LDQ3MS44OTZIMTMwLjY1NEw5OS40MjYsMTE2Ljk3MWgzMTIuNDc0ICAgICBMMzgwLjY2NSw0NzEuODk2eiIgZmlsbD0iIzAwMDAwMCIvPgoJCTwvZz4KCTwvZz4KPC9nPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik0zMjEuNTA0LDBIMTkwLjQ5NmMtMTguNDI4LDAtMzMuNDIsMTQuOTkyLTMzLjQyLDMzLjQydjYzLjQ5OWg0MC4xMDRWNDAuMTA0aDExNy42NHY1Ni44MTVoNDAuMTA0VjMzLjQyICAgIEMzNTQuOTI0LDE0Ljk5MiwzMzkuOTMyLDAsMzIxLjUwNCwweiIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" />
+      <img title="drop a task here to delete" class="cursor" @drop="drop" @dragover="drag_over" width="40" height="40" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8Zz4KCTxnPgoJCTxnPgoJCQk8cG9seWdvbiBwb2ludHM9IjM1My41NzQsMTc2LjUyNiAzMTMuNDk2LDE3NS4wNTYgMzA0LjgwNyw0MTIuMzQgMzQ0Ljg4NSw0MTMuODA0ICAgICIgZmlsbD0iIzAwMDAwMCIvPgoJCQk8cmVjdCB4PSIyMzUuOTQ4IiB5PSIxNzUuNzkxIiB3aWR0aD0iNDAuMTA0IiBoZWlnaHQ9IjIzNy4yODUiIGZpbGw9IiMwMDAwMDAiLz4KCQkJPHBvbHlnb24gcG9pbnRzPSIyMDcuMTg2LDQxMi4zMzQgMTk4LjQ5NywxNzUuMDQ5IDE1OC40MTksMTc2LjUyIDE2Ny4xMDksNDEzLjgwNCAgICAiIGZpbGw9IiMwMDAwMDAiLz4KCQkJPHBhdGggZD0iTTE3LjM3OSw3Ni44Njd2NDAuMTA0aDQxLjc4OUw5Mi4zMiw0OTMuNzA2QzkzLjIyOSw1MDQuMDU5LDEwMS44OTksNTEyLDExMi4yOTIsNTEyaDI4Ni43NCAgICAgYzEwLjM5NCwwLDE5LjA3LTcuOTQ3LDE5Ljk3Mi0xOC4zMDFsMzMuMTUzLTM3Ni43MjhoNDIuNDY0Vjc2Ljg2N0gxNy4zNzl6IE0zODAuNjY1LDQ3MS44OTZIMTMwLjY1NEw5OS40MjYsMTE2Ljk3MWgzMTIuNDc0ICAgICBMMzgwLjY2NSw0NzEuODk2eiIgZmlsbD0iIzAwMDAwMCIvPgoJCTwvZz4KCTwvZz4KPC9nPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik0zMjEuNTA0LDBIMTkwLjQ5NmMtMTguNDI4LDAtMzMuNDIsMTQuOTkyLTMzLjQyLDMzLjQydjYzLjQ5OWg0MC4xMDRWNDAuMTA0aDExNy42NHY1Ni44MTVoNDAuMTA0VjMzLjQyICAgIEMzNTQuOTI0LDE0Ljk5MiwzMzkuOTMyLDAsMzIxLjUwNCwweiIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" />
       &nbsp; &nbsp;
       <!-- <img  src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQyIDQyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MiA0MjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+Cjxwb2x5Z29uIHBvaW50cz0iNDIsMTkgMjMsMTkgMjMsMCAxOSwwIDE5LDE5IDAsMTkgMCwyMyAxOSwyMyAxOSw0MiAyMyw0MiAyMywyMyA0MiwyMyAiIGZpbGw9IiMwMDAwMDAiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" /> -->
-      <img @click="addTask()" class="cursor" width="40" height="40" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUwIDUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MCA1MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxjaXJjbGUgc3R5bGU9ImZpbGw6IzQzQjA1QzsiIGN4PSIyNSIgY3k9IjI1IiByPSIyNSIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIyNSIgeTE9IjEzIiB4Mj0iMjUiIHkyPSIzOCIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzNy41IiB5MT0iMjUiIHgyPSIxMi41IiB5Mj0iMjUiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
+      <img title="click to add net task" @click="addTask()" class="cursor" width="40" height="40" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUwIDUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MCA1MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxjaXJjbGUgc3R5bGU9ImZpbGw6IzQzQjA1QzsiIGN4PSIyNSIgY3k9IjI1IiByPSIyNSIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIyNSIgeTE9IjEzIiB4Mj0iMjUiIHkyPSIzOCIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzNy41IiB5MT0iMjUiIHgyPSIxMi41IiB5Mj0iMjUiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
     </div>
   </div>
 </template>
@@ -70,26 +70,29 @@ export default {
 
 <style>
 .todo-list {
-  text-align: center;
-  align-content: center;
+  /* text-align: center; */
+  /* align-content: center; */
   overflow-y: auto;
-  margin-top: 15px;
   background-color: white;
+  min-height: 77%;
+  max-height: 77%;
+  /* height: 50%; */
+  width: 100%;
+  position: absolute;
+  overflow-y: auto;
 }
 
 .todo-list-main {
   width: 50%;
-  margin: 0 auto;
-
+  align-content: center;
+  text-align: center;
+  min-height: 96%;
   background-color: white;
-  /* padding: 10px 0px 20px 0px; */
-  min-height: 95%;
-  margin-top: 20px;
-  position: relative;
-  /* height: 90%; */
-  /* position: absolute; */
+  margin-top: 10px;
+  position: absolute;
   box-shadow: 0 2px 5px 0.8px #bebebe;
   border-radius: 4px;
+  margin-left: 25%;
 }
 
 ul > li {
@@ -98,9 +101,9 @@ ul > li {
   margin-top: 25px;
   margin-bottom: 10px;
   width: 90%;
-  background-color: #f2f2f2;
+  background-color: #f9f9f9ee;
   border-radius: 6px;
-  box-shadow: 0 2px 4px 0.3px #c9c9c9
+  box-shadow: 0 1px 2px 0.2px #c9c9c9
 }
 
 .task:hover {
@@ -124,11 +127,13 @@ ul > li {
 }
 
 .stable-div {
-  /* margin-bottom: 0; */
-  /* position: absolute; */
-  right: 0;
+  margin-top: 50px !important;
+  position: absolute;
+  /* right: 0; */
+  bottom: 0;
   text-align: center;
   align-content: center;
-  padding: 0px 0px 20px 0px;
+  padding: 20px 0px 20px 0px;
+  width: 100%;
 }
 </style>
