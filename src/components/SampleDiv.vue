@@ -135,5 +135,6 @@ ul > li {
   align-content: center;
   padding: 20px 0px 20px 0px;
   width: 100%;
+  background-color: #f0f0f0ea;
 }
 </style>
