@@ -1,6 +1,28 @@
 <template>
-
-  <div class="todo-list-main">
+  <div v-if="displayModel" id="myModal" class="modal" :class="{block: displayModel}">
+     <div class="modal-content">
+      <div class="modal-header">
+        <span @click="closeModel()" class="close">&times;</span>
+        <h2>Modal Header</h2>
+      </div>
+      <div class="modal-body">
+        <textarea v-model="taskData" rows="10" resize="none" placeholder="What do you like to add" style="font-size: 16px; padding: 10px 10px 10px 10px; width: 95%; border:none;" >
+        </textarea>
+        <div style="right:15px; margin-top: -20px; position: absolute; float:right; margin-bottom:3px;">
+          <!-- <datepicker>
+            <img class="cursor" width="16" height="16" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjUxMnB4Ij48cGF0aCBkPSJtNDgyIDI5Mi4yNXYtMjQ2LjI1YzAtOC4yODUxNTYtNi43MTQ4NDQtMTUtMTUtMTVoLTc2di0xNmMwLTguMjg1MTU2LTYuNzE0ODQ0LTE1LTE1LTE1cy0xNSA2LjcxNDg0NC0xNSAxNXYxNmgtNjB2LTE2YzAtOC4yODUxNTYtNi43MTQ4NDQtMTUtMTUtMTVzLTE1IDYuNzE0ODQ0LTE1IDE1djE2aC02MHYtMTZjMC04LjI4NTE1Ni02LjcxNDg0NC0xNS0xNS0xNXMtMTUgNi43MTQ4NDQtMTUgMTV2MTZoLTYwdi0xNmMwLTguMjg1MTU2LTYuNzE0ODQ0LTE1LTE1LTE1cy0xNSA2LjcxNDg0NC0xNSAxNXYxNmgtNzZjLTguMjg1MTU2IDAtMTUgNi43MTQ4NDQtMTUgMTV2MzkxYzAgOC4yODUxNTYgNi43MTQ4NDQgMTUgMTUgMTVoMjQ5LjgwNDY4OGMyNC4yNSAzNi4xNTIzNDQgNjUuNDg4MjgxIDYwIDExMi4xOTUzMTIgNjAgNzQuNDM3NSAwIDEzNS02MC41NjI1IDEzNS0xMzUgMC0zMi4wNzAzMTItMTEuMjUtNjEuNTYyNS0zMC04NC43NXptLTM5MS0yMzEuMjV2MTVjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNXMxNS02LjcxNDg0NCAxNS0xNXYtMTVoNjB2MTVjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNXMxNS02LjcxNDg0NCAxNS0xNXYtMTVoNjB2MTVjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNXMxNS02LjcxNDg0NCAxNS0xNXYtMTVoNjB2MTVjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNXMxNS02LjcxNDg0NCAxNS0xNXYtMTVoNjF2NjBoLTQyMnYtNjB6bS02MSAzNjF2LTI3MWg0MjJ2MTEzLjgwNDY4OGMtMjEuNDY0ODQ0LTE0LjM5NDUzMi00Ny4yNjk1MzEtMjIuODA0Njg4LTc1LTIyLjgwNDY4OC00Ny4zOTg0MzggMC04OS4xNjQwNjIgMjQuNTU4NTk0LTExMy4yNTc4MTIgNjEuNjEzMjgxLTIuMDI3MzQ0LTEuMDIzNDM3LTQuMzEyNS0xLjYxMzI4MS02Ljc0MjE4OC0xLjYxMzI4MWgtMzBjLTguMjg1MTU2IDAtMTUgNi43MTQ4NDQtMTUgMTVzNi43MTQ4NDQgMTUgMTUgMTVoMjIuNzIyNjU2Yy0zLjM4NjcxOCA5LjU1NDY4OC01LjczMDQ2OCAxOS42MDE1NjItNi44ODI4MTIgMzBoLTE1LjgzOTg0NGMtOC4yODUxNTYgMC0xNSA2LjcxNDg0NC0xNSAxNXM2LjcxNDg0NCAxNSAxNSAxNWgxNS44Mzk4NDRjMS4xNTIzNDQgMTAuMzk4NDM4IDMuNDkyMTg3IDIwLjQ0NTMxMiA2Ljg4MjgxMiAzMHptMzQ3IDYwYy01Ny44OTg0MzggMC0xMDUtNDcuMTAxNTYyLTEwNS0xMDVzNDcuMTAxNTYyLTEwNSAxMDUtMTA1IDEwNSA0Ny4xMDE1NjIgMTA1IDEwNS00Ny4xMDE1NjIgMTA1LTEwNSAxMDV6bTAgMCIgZmlsbD0iIzAwMDAwMCIvPjxwYXRoIGQ9Im00MzcgMzYyaC00NXYtNDVjMC04LjI4NTE1Ni02LjcxNDg0NC0xNS0xNS0xNXMtMTUgNi43MTQ4NDQtMTUgMTV2NjBjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNWg2MGM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1cy02LjcxNDg0NC0xNS0xNS0xNXptMCAwIiBmaWxsPSIjMDAwMDAwIi8+PHBhdGggZD0ibTEzNiAxODJoLTMwYy04LjI4NTE1NiAwLTE1IDYuNzE0ODQ0LTE1IDE1czYuNzE0ODQ0IDE1IDE1IDE1aDMwYzguMjg1MTU2IDAgMTUtNi43MTQ4NDQgMTUtMTVzLTYuNzE0ODQ0LTE1LTE1LTE1em0wIDAiIGZpbGw9IiMwMDAwMDAiLz48cGF0aCBkPSJtMTM2IDI0MmgtMzBjLTguMjg1MTU2IDAtMTUgNi43MTQ4NDQtMTUgMTVzNi43MTQ4NDQgMTUgMTUgMTVoMzBjOC4yODUxNTYgMCAxNS02LjcxNDg0NCAxNS0xNXMtNi43MTQ4NDQtMTUtMTUtMTV6bTAgMCIgZmlsbD0iIzAwMDAwMCIvPjxwYXRoIGQ9Im0xMzYgMzAyaC0zMGMtOC4yODUxNTYgMC0xNSA2LjcxNDg0NC0xNSAxNXM2LjcxNDg0NCAxNSAxNSAxNWgzMGM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1cy02LjcxNDg0NC0xNS0xNS0xNXptMCAwIiBmaWxsPSIjMDAwMDAwIi8+PHBhdGggZD0ibTIyNyAyMTJoMzBjOC4yODUxNTYgMCAxNS02LjcxNDg0NCAxNS0xNXMtNi43MTQ4NDQtMTUtMTUtMTVoLTMwYy04LjI4NTE1NiAwLTE1IDYuNzE0ODQ0LTE1IDE1czYuNzE0ODQ0IDE1IDE1IDE1em0wIDAiIGZpbGw9IiMwMDAwMDAiLz48cGF0aCBkPSJtMjI3IDI3MmgzMGM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1cy02LjcxNDg0NC0xNS0xNS0xNWgtMzBjLTguMjg1MTU2IDAtMTUgNi43MTQ4NDQtMTUgMTVzNi43MTQ4NDQgMTUgMTUgMTV6bTAgMCIgZmlsbD0iIzAwMDAwMCIvPjxwYXRoIGQ9Im0xMzYgMzYyaC0zMGMtOC4yODUxNTYgMC0xNSA2LjcxNDg0NC0xNSAxNXM2LjcxNDg0NCAxNSAxNSAxNWgzMGM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1cy02LjcxNDg0NC0xNS0xNS0xNXptMCAwIiBmaWxsPSIjMDAwMDAwIi8+PHBhdGggZD0ibTM0NyAyMTJoMzBjOC4yODUxNTYgMCAxNS02LjcxNDg0NCAxNS0xNXMtNi43MTQ4NDQtMTUtMTUtMTVoLTMwYy04LjI4NTE1NiAwLTE1IDYuNzE0ODQ0LTE1IDE1czYuNzE0ODQ0IDE1IDE1IDE1em0wIDAiIGZpbGw9IiMwMDAwMDAiLz48L3N2Zz4K" />
+          </datepicker> -->
+          <datepicker v-model="taskDate" @selected="doSomethingInParentComponentFunction" @opened="datepickerOpenedFunction" @closed="datepickerClosedFunction">
+            <!-- <img class="cursor" width="16" height="16" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjUxMnB4Ij48cGF0aCBkPSJtNDgyIDI5Mi4yNXYtMjQ2LjI1YzAtOC4yODUxNTYtNi43MTQ4NDQtMTUtMTUtMTVoLTc2di0xNmMwLTguMjg1MTU2LTYuNzE0ODQ0LTE1LTE1LTE1cy0xNSA2LjcxNDg0NC0xNSAxNXYxNmgtNjB2LTE2YzAtOC4yODUxNTYtNi43MTQ4NDQtMTUtMTUtMTVzLTE1IDYuNzE0ODQ0LTE1IDE1djE2aC02MHYtMTZjMC04LjI4NTE1Ni02LjcxNDg0NC0xNS0xNS0xNXMtMTUgNi43MTQ4NDQtMTUgMTV2MTZoLTYwdi0xNmMwLTguMjg1MTU2LTYuNzE0ODQ0LTE1LTE1LTE1cy0xNSA2LjcxNDg0NC0xNSAxNXYxNmgtNzZjLTguMjg1MTU2IDAtMTUgNi43MTQ4NDQtMTUgMTV2MzkxYzAgOC4yODUxNTYgNi43MTQ4NDQgMTUgMTUgMTVoMjQ5LjgwNDY4OGMyNC4yNSAzNi4xNTIzNDQgNjUuNDg4MjgxIDYwIDExMi4xOTUzMTIgNjAgNzQuNDM3NSAwIDEzNS02MC41NjI1IDEzNS0xMzUgMC0zMi4wNzAzMTItMTEuMjUtNjEuNTYyNS0zMC04NC43NXptLTM5MS0yMzEuMjV2MTVjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNXMxNS02LjcxNDg0NCAxNS0xNXYtMTVoNjB2MTVjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNXMxNS02LjcxNDg0NCAxNS0xNXYtMTVoNjB2MTVjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNXMxNS02LjcxNDg0NCAxNS0xNXYtMTVoNjB2MTVjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNXMxNS02LjcxNDg0NCAxNS0xNXYtMTVoNjF2NjBoLTQyMnYtNjB6bS02MSAzNjF2LTI3MWg0MjJ2MTEzLjgwNDY4OGMtMjEuNDY0ODQ0LTE0LjM5NDUzMi00Ny4yNjk1MzEtMjIuODA0Njg4LTc1LTIyLjgwNDY4OC00Ny4zOTg0MzggMC04OS4xNjQwNjIgMjQuNTU4NTk0LTExMy4yNTc4MTIgNjEuNjEzMjgxLTIuMDI3MzQ0LTEuMDIzNDM3LTQuMzEyNS0xLjYxMzI4MS02Ljc0MjE4OC0xLjYxMzI4MWgtMzBjLTguMjg1MTU2IDAtMTUgNi43MTQ4NDQtMTUgMTVzNi43MTQ4NDQgMTUgMTUgMTVoMjIuNzIyNjU2Yy0zLjM4NjcxOCA5LjU1NDY4OC01LjczMDQ2OCAxOS42MDE1NjItNi44ODI4MTIgMzBoLTE1LjgzOTg0NGMtOC4yODUxNTYgMC0xNSA2LjcxNDg0NC0xNSAxNXM2LjcxNDg0NCAxNSAxNSAxNWgxNS44Mzk4NDRjMS4xNTIzNDQgMTAuMzk4NDM4IDMuNDkyMTg3IDIwLjQ0NTMxMiA2Ljg4MjgxMiAzMHptMzQ3IDYwYy01Ny44OTg0MzggMC0xMDUtNDcuMTAxNTYyLTEwNS0xMDVzNDcuMTAxNTYyLTEwNSAxMDUtMTA1IDEwNSA0Ny4xMDE1NjIgMTA1IDEwNS00Ny4xMDE1NjIgMTA1LTEwNSAxMDV6bTAgMCIgZmlsbD0iIzAwMDAwMCIvPjxwYXRoIGQ9Im00MzcgMzYyaC00NXYtNDVjMC04LjI4NTE1Ni02LjcxNDg0NC0xNS0xNS0xNXMtMTUgNi43MTQ4NDQtMTUgMTV2NjBjMCA4LjI4NTE1NiA2LjcxNDg0NCAxNSAxNSAxNWg2MGM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1cy02LjcxNDg0NC0xNS0xNS0xNXptMCAwIiBmaWxsPSIjMDAwMDAwIi8+PHBhdGggZD0ibTEzNiAxODJoLTMwYy04LjI4NTE1NiAwLTE1IDYuNzE0ODQ0LTE1IDE1czYuNzE0ODQ0IDE1IDE1IDE1aDMwYzguMjg1MTU2IDAgMTUtNi43MTQ4NDQgMTUtMTVzLTYuNzE0ODQ0LTE1LTE1LTE1em0wIDAiIGZpbGw9IiMwMDAwMDAiLz48cGF0aCBkPSJtMTM2IDI0MmgtMzBjLTguMjg1MTU2IDAtMTUgNi43MTQ4NDQtMTUgMTVzNi43MTQ4NDQgMTUgMTUgMTVoMzBjOC4yODUxNTYgMCAxNS02LjcxNDg0NCAxNS0xNXMtNi43MTQ4NDQtMTUtMTUtMTV6bTAgMCIgZmlsbD0iIzAwMDAwMCIvPjxwYXRoIGQ9Im0xMzYgMzAyaC0zMGMtOC4yODUxNTYgMC0xNSA2LjcxNDg0NC0xNSAxNXM2LjcxNDg0NCAxNSAxNSAxNWgzMGM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1cy02LjcxNDg0NC0xNS0xNS0xNXptMCAwIiBmaWxsPSIjMDAwMDAwIi8+PHBhdGggZD0ibTIyNyAyMTJoMzBjOC4yODUxNTYgMCAxNS02LjcxNDg0NCAxNS0xNXMtNi43MTQ4NDQtMTUtMTUtMTVoLTMwYy04LjI4NTE1NiAwLTE1IDYuNzE0ODQ0LTE1IDE1czYuNzE0ODQ0IDE1IDE1IDE1em0wIDAiIGZpbGw9IiMwMDAwMDAiLz48cGF0aCBkPSJtMjI3IDI3MmgzMGM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1cy02LjcxNDg0NC0xNS0xNS0xNWgtMzBjLTguMjg1MTU2IDAtMTUgNi43MTQ4NDQtMTUgMTVzNi43MTQ4NDQgMTUgMTUgMTV6bTAgMCIgZmlsbD0iIzAwMDAwMCIvPjxwYXRoIGQ9Im0xMzYgMzYyaC0zMGMtOC4yODUxNTYgMC0xNSA2LjcxNDg0NC0xNSAxNXM2LjcxNDg0NCAxNSAxNSAxNWgzMGM4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1cy02LjcxNDg0NC0xNS0xNS0xNXptMCAwIiBmaWxsPSIjMDAwMDAwIi8+PHBhdGggZD0ibTM0NyAyMTJoMzBjOC4yODUxNTYgMCAxNS02LjcxNDg0NCAxNS0xNXMtNi43MTQ4NDQtMTUtMTUtMTVoLTMwYy04LjI4NTE1NiAwLTE1IDYuNzE0ODQ0LTE1IDE1czYuNzE0ODQ0IDE1IDE1IDE1em0wIDAiIGZpbGw9IiMwMDAwMDAiLz48L3N2Zz4K" /> -->
+          </datepicker>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button @click=addTask2() style="width:100%; padding: 12px; background-color: #428bca; border: none; font-size:20px; color: white;" class="cursor"> + </button>
+      </div>
+    </div>
+  </div>
+  <div v-else class="todo-list-main">
 
     <div class="user-logo-main">
       <div class="user-logo-details-main" style="width: 70%">
@@ -8,11 +30,12 @@
           Hello Floyd Mullins
         </div>
         <div class="user-logo-details2">
-          You have {{tasks.length}} task(s)
+          <div class="" style="display: flex">
+            You have {{tasks.length}} task(s)
+          </div>
         </div>
       </div>
       <div class="user-logo" >
-        <!-- <img width="64" height="64" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ4Mi45IDQ4Mi45IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0ODIuOSA0ODIuOTsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTIzOS43LDI2MC4yYzAuNSwwLDEsMCwxLjYsMGMwLjIsMCwwLjQsMCwwLjYsMGMwLjMsMCwwLjcsMCwxLDBjMjkuMy0wLjUsNTMtMTAuOCw3MC41LTMwLjUgICAgYzM4LjUtNDMuNCwzMi4xLTExNy44LDMxLjQtMTI0LjljLTIuNS01My4zLTI3LjctNzguOC00OC41LTkwLjdDMjgwLjgsNS4yLDI2Mi43LDAuNCwyNDIuNSwwaC0wLjdjLTAuMSwwLTAuMywwLTAuNCwwaC0wLjYgICAgYy0xMS4xLDAtMzIuOSwxLjgtNTMuOCwxMy43Yy0yMSwxMS45LTQ2LjYsMzcuNC00OS4xLDkxLjFjLTAuNyw3LjEtNy4xLDgxLjUsMzEuNCwxMjQuOUMxODYuNywyNDkuNCwyMTAuNCwyNTkuNywyMzkuNywyNjAuMnogICAgIE0xNjQuNiwxMDcuM2MwLTAuMywwLjEtMC42LDAuMS0wLjhjMy4zLTcxLjcsNTQuMi03OS40LDc2LTc5LjRoMC40YzAuMiwwLDAuNSwwLDAuOCwwYzI3LDAuNiw3Mi45LDExLjYsNzYsNzkuNCAgICBjMCwwLjMsMCwwLjYsMC4xLDAuOGMwLjEsMC43LDcuMSw2OC43LTI0LjcsMTA0LjVjLTEyLjYsMTQuMi0yOS40LDIxLjItNTEuNSwyMS40Yy0wLjIsMC0wLjMsMC0wLjUsMGwwLDBjLTAuMiwwLTAuMywwLTAuNSwwICAgIGMtMjItMC4yLTM4LjktNy4yLTUxLjQtMjEuNEMxNTcuNywxNzYuMiwxNjQuNSwxMDcuOSwxNjQuNiwxMDcuM3oiIGZpbGw9IiMwMDAwMDAiLz4KCQk8cGF0aCBkPSJNNDQ2LjgsMzgzLjZjMC0wLjEsMC0wLjIsMC0wLjNjMC0wLjgtMC4xLTEuNi0wLjEtMi41Yy0wLjYtMTkuOC0xLjktNjYuMS00NS4zLTgwLjljLTAuMy0wLjEtMC43LTAuMi0xLTAuMyAgICBjLTQ1LjEtMTEuNS04Mi42LTM3LjUtODMtMzcuOGMtNi4xLTQuMy0xNC41LTIuOC0xOC44LDMuM2MtNC4zLDYuMS0yLjgsMTQuNSwzLjMsMTguOGMxLjcsMS4yLDQxLjUsMjguOSw5MS4zLDQxLjcgICAgYzIzLjMsOC4zLDI1LjksMzMuMiwyNi42LDU2YzAsMC45LDAsMS43LDAuMSwyLjVjMC4xLDktMC41LDIyLjktMi4xLDMwLjljLTE2LjIsOS4yLTc5LjcsNDEtMTc2LjMsNDEgICAgYy05Ni4yLDAtMTYwLjEtMzEuOS0xNzYuNC00MS4xYy0xLjYtOC0yLjMtMjEuOS0yLjEtMzAuOWMwLTAuOCwwLjEtMS42LDAuMS0yLjVjMC43LTIyLjgsMy4zLTQ3LjcsMjYuNi01NiAgICBjNDkuOC0xMi44LDg5LjYtNDAuNiw5MS4zLTQxLjdjNi4xLTQuMyw3LjYtMTIuNywzLjMtMTguOGMtNC4zLTYuMS0xMi43LTcuNi0xOC44LTMuM2MtMC40LDAuMy0zNy43LDI2LjMtODMsMzcuOCAgICBjLTAuNCwwLjEtMC43LDAuMi0xLDAuM2MtNDMuNCwxNC45LTQ0LjcsNjEuMi00NS4zLDgwLjljMCwwLjksMCwxLjctMC4xLDIuNWMwLDAuMSwwLDAuMiwwLDAuM2MtMC4xLDUuMi0wLjIsMzEuOSw1LjEsNDUuMyAgICBjMSwyLjYsMi44LDQuOCw1LjIsNi4zYzMsMiw3NC45LDQ3LjgsMTk1LjIsNDcuOHMxOTIuMi00NS45LDE5NS4yLTQ3LjhjMi4zLTEuNSw0LjItMy43LDUuMi02LjMgICAgQzQ0Nyw0MTUuNSw0NDYuOSwzODguOCw0NDYuOCwzODMuNnoiIGZpbGw9IiMwMDAwMDAiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" /> -->
         <img width="64" height="64" style="border-radius:50%;" src="https://res.cloudinary.com/dw7ckktut/image/upload/v1554643930/ramaiah.jpg" />
       </div>
     </div>
@@ -20,8 +43,8 @@
       <div v-if="tasks.length > 0" class="">
         <ul id="tasks-list">
           <li class="task" v-for="(task, index) in tasks" :key="task.id" :index="index" contenteditable="true"  draggable="true" @dragstart="drag_start" @dragend="drag_end()" >
-            <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.6; color: #111; font-size: 18px; font-family: Helvitica;"> {{task.text}} </div>
-            <div style="padding: 2px 0px 0px 20px; opacity: 0.6; font-weight:550; color: #333;"> Due Fri Mar 12 </div>
+            <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.9; color: #444; font-size: 18px; font-family: Helvitica;"> {{task.text}} </div>
+            <div style="padding: 2px 0px 0px 20px; opacity: 0.9; font-weight:550; color: #bbb; font-size:16px;"> Due {{frontEndDateFormat(task.date)}} </div>
           </li>
         </ul>
       </div>
@@ -29,22 +52,29 @@
 
     <div class="stable-div">
       <img v-if="deleteIcon === true" title="drop a task here to delete" class="cursor" @drop="drop" @dragover="drag_over" width="74" height="72" src="https://cdn1.iconfinder.com/data/icons/round-ui/123/47-512.png" />
-        <!-- &nbsp; &nbsp; -->
-      <!-- <img  src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQyIDQyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MiA0MjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+Cjxwb2x5Z29uIHBvaW50cz0iNDIsMTkgMjMsMTkgMjMsMCAxOSwwIDE5LDE5IDAsMTkgMCwyMyAxOSwyMyAxOSw0MiAyMyw0MiAyMywyMyA0MiwyMyAiIGZpbGw9IiMwMDAwMDAiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" /> -->
-      <img v-if="deleteIcon === false" title="click to add net task" @click="addTask()" class="cursor" width="64" height="64" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUwIDUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MCA1MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxjaXJjbGUgc3R5bGU9ImZpbGw6IzQzQjA1QzsiIGN4PSIyNSIgY3k9IjI1IiByPSIyNSIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIyNSIgeTE9IjEzIiB4Mj0iMjUiIHkyPSIzOCIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzNy41IiB5MT0iMjUiIHgyPSIxMi41IiB5Mj0iMjUiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
+      <img v-if="deleteIcon === false" title="click to add net task" @click="openModel()" class="cursor" width="64" height="64" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUwIDUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MCA1MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxjaXJjbGUgc3R5bGU9ImZpbGw6IzQzQjA1QzsiIGN4PSIyNSIgY3k9IjI1IiByPSIyNSIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIyNSIgeTE9IjEzIiB4Mj0iMjUiIHkyPSIzOCIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzNy41IiB5MT0iMjUiIHgyPSIxMi41IiB5Mj0iMjUiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
     </div>
   </div>
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker'
 export default {
+  components: {
+    Datepicker
+  },
   name: 'SampleDiv',
   data () {
     return {
       msg: 'Sample Div',
       tasks: [],
       taskId: 0,
-      deleteIcon: false
+      deleteIcon: false,
+      displayModel: false,
+      taskData: '',
+      taskDate: '',
+      days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     }
   },
   methods: {
@@ -55,6 +85,17 @@ export default {
         text: 'Task ' + (this.taskId + 1)
       })
 
+      this.taskId++
+    },
+    addTask2 () {
+      console.log('called add task2 ', this.taskDate)
+      this.tasks.push({
+        id: this.taskId,
+        text: this.taskData,
+        date: this.taskDate
+      })
+      this.taskData = ''
+      this.displayModel = false
       this.taskId++
     },
     drag_start (event) {
@@ -76,6 +117,25 @@ export default {
     },
     drag_end () {
       this.deleteIcon = false
+    },
+    openModel () {
+      this.displayModel = true
+    },
+    closeModel () {
+      this.displayModel = false
+    },
+    doSomethingInParentComponentFunction () {
+      console.log('doSomethingInParentComponentFunction called')
+    },
+    datepickerOpenedFunction () {
+      console.log('datepickerOpenedFunction called')
+    },
+    datepickerClosedFunction () {
+      console.log('datepickerClosedFunction called')
+    },
+    frontEndDateFormat (date) {
+      let nDate = new Date(date)
+      return this.days[nDate.getDay()] + ' ' + this.months[nDate.getMonth()] + ' ' + nDate.getDate()
     }
   }
 }
@@ -93,6 +153,7 @@ export default {
   width: 100%;
   position: absolute;
   overflow-y: auto;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .todo-list-main {
@@ -110,14 +171,14 @@ export default {
 
 ul > li {
   list-style: none;
-  padding: 13px 13px 13px 0px;
+  padding: 15px 15px 20px 0px;
   margin-top: 10px;
   /* margin-left: -4%; */
   margin-bottom: 10px;
   width: 90%;
   background-color: #fefefeca;
-  border-radius: 6px;
-  box-shadow: 0 1px 2px 0.2px #c9c9c9
+  border-radius: 4px;
+  box-shadow: 0 2px 3px 0.2px #cfcfcf
 }
 
 .task:hover {
@@ -133,7 +194,7 @@ ul > li {
   /* text-align: center; */
   /* align-content: center; */
   background-color: #fcfcfcaa;
-  padding: 20px 0px 20px 0px;
+  padding: 20px 0px 15px 0px;
   width: 100%;
   min-width: 100%;
   display: flex;
@@ -186,5 +247,102 @@ ul > li {
   padding: 20px 0px 20px 0px;
   width: 100%;
   /* background-color: #fafafaaa; */
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  /* margin-left: 1%; */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 40%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0};
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: black;
+  float: left;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 5px 5px 0px 10px;
+  /* background-color: #5cb85c; */
+  color: white;
+}
+
+.modal-body {
+  padding: 0px 10px 10px 10px;
+  margin-top: -20px;
+}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #428bca;
+  color: white;
+}
+
+.block {
+  display: block;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea:focus {
+  border: none;
+  outline: none;
+}
+
+textarea:active{
+  border: none;
+  outline: none;
+}
+
+textarea:checked{
+  border: none;
+  outline: none;
 }
 </style>
