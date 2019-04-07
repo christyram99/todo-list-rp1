@@ -17,8 +17,8 @@
           </datepicker>
         </div>
       </div>
-      <div class="modal-footer">
-        <button @click=addTask2() style="width:100%; padding: 12px; background-color: #428bca; border: none; font-size:20px; color: white;" class="cursor"> + </button>
+      <div class="modal-footer cursor" >
+        <button :disabled="!taskData || !taskDate" :class="{disabled : (!taskData || !taskDate), cursor: (taskData && taskDate)}" @click=addTask2() style="width:100%; padding: 12px; background-color: #428bca; border: none; font-size:20px; color: white;"> + </button>
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
           Hello Floyd Mullins
         </div>
         <div class="user-logo-details2">
-          <div class="" style="display: flex">
+          <div class="">
             You have {{tasks.length}} task(s)
           </div>
         </div>
@@ -43,7 +43,12 @@
       <div v-if="tasks.length > 0" class="">
         <ul id="tasks-list">
           <li class="task" v-for="(task, index) in tasks" :key="task.id" :index="index" contenteditable="true"  draggable="true" @dragstart="drag_start" @dragend="drag_end()" >
-            <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.9; color: #444; font-size: 18px; font-family: Helvitica;"> {{task.text}} </div>
+            <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.9; color: #444; font-size: 18px; font-family: Helvitica; display: flex">
+              <div class="" style="width:98%"> {{task.text}} </div>
+              <div class="" style="width:2%">
+                <img width="16" height="16" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTE1LjEgNTE1LjEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxNS4xIDUxNS4xOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPGcgaWQ9ImFjY2Vzcy1hbGFybXMiPgoJCTxwYXRoIGQ9Ik01MTIuNTUsOTkuNDVMMzk1LjI1LDBMMzYyLjEsMzguMjVsMTE3LjMsOTkuNDVMNTEyLjU1LDk5LjQ1eiBNMTUzLDQwLjhMMTE5Ljg1LDIuNTVMMi41NSw5OS40NUwzNS43LDEzNy43TDE1Myw0MC44eiAgICAgTTI3MC4zLDE1OC4xaC0zOC4yNXYxNTNsMTE5Ljg1LDczLjk1MWwyMC40LTMwLjYwMmwtMTAyLTYxLjE5OVYxNTguMXogTTI1Ny41NSw1Ni4xYy0xMjcuNSwwLTIyOS41LDEwMi0yMjkuNSwyMjkuNSAgICBjMCwxMjcuNSwxMDIsMjI5LjUsMjI5LjUsMjI5LjVzMjI5LjUtMTAyLDIyOS41LTIyOS41QzQ4Ny4wNSwxNTguMSwzODUuMDUsNTYuMSwyNTcuNTUsNTYuMXogTTI1Ny41NSw0NjQuMSAgICBjLTk5LjQ1LDAtMTc4LjUtNzkuMDQ5LTE3OC41LTE3OC41YzAtOTkuNDUsNzkuMDUtMTc4LjUsMTc4LjUtMTc4LjVzMTc4LjUsNzkuMDUsMTc4LjUsMTc4LjUgICAgQzQzNi4wNSwzODUuMDUxLDM1Nyw0NjQuMSwyNTcuNTUsNDY0LjF6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
+              </div>
+            </div>
             <div style="padding: 2px 0px 0px 20px; opacity: 0.9; font-weight:550; color: #bbb; font-size:16px;"> Due {{frontEndDateFormat(task.date)}} </div>
           </li>
         </ul>
@@ -344,5 +349,13 @@ textarea:active{
 textarea:checked{
   border: none;
   outline: none;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.disabled: :hover {
+  cursor: not-allowed;
 }
 </style>
