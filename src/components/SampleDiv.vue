@@ -52,7 +52,7 @@
             <div style="padding: 2px 0px 0px 20px; opacity: 0.9; font-weight:550; color: #bbb; font-size:14px;"> Due {{frontEndDateFormat(task.date)}} </div>
           </div> -->
           <div v-for="(task, index) in tasks" class="task" :key="task.id" :data-index="index" >
-            <draggable @start="dragging=true, dragIndex=index" @end="dragging=false">
+            <draggable :sortable="true" @start="dragging=true, dragIndex=index" @end="dragging=false, drop2()">
               <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.9; color: #444; font-size: 15px; font-family: Sans-serif; display: flex">
                 <div class="" style="width:97%"> {{task.text}} </div>
                 <div class="" style="width:3%">
@@ -92,7 +92,8 @@ export default {
       taskDate: new Date(),
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      dragIndex: 0
+      dragIndex: 0,
+      deleteDrag: false
     }
   },
   methods: {
@@ -119,6 +120,8 @@ export default {
     drag_start (event) {
       this.deleteIcon = true
       console.log(' in drag start handler')
+      // event.addEventListner('onDrop', function () {
+      // })
       // event.dataTransfer.setData('index', this.dragIndex)
     },
     drag_over (event) {
@@ -126,13 +129,18 @@ export default {
       event.preventDefault()
     },
     drop (event) {
-      console.log('in drop ', event)
+      console.log('in drop ')
       event.preventDefault()
-      let index = this.dragIndex
-      console.log('index ', index, this.dragIndex)
-      this.tasks.splice(index, 1)
       this.dragging = false
-      // this.deleteIcon = false
+      this.deleteDrag = true
+    },
+    drop2 () {
+      if (this.deleteDrag) {
+        let index = this.dragIndex
+        console.log('index ', index, this.dragIndex)
+        this.tasks.splice(index, 1)
+        this.deleteDrag = false
+      }
     },
     drag_end () {
       this.deleteIcon = false
