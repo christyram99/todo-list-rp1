@@ -6,7 +6,7 @@
         <h2>Modal Header</h2>
       </div>
       <div class="modal-body">
-        <textarea v-model="taskData" rows="10" resize="none" placeholder="What do you like to add" style="font-size: 16px; padding: 10px 10px 10px 10px; width: 95%; border:none;" >
+        <textarea v-model="taskData" rows="7" resize="none" placeholder="What do you like to add" style="font-size: 14px; padding: 10px 10px 10px 10px; width: 95%; border:none;" >
         </textarea>
         <div style="right:15px; margin-top: -20px; position: absolute; float:right; margin-bottom:3px;">
           <!-- <datepicker>
@@ -25,7 +25,7 @@
   <div v-else class="todo-list-main">
 
     <div class="user-logo-main">
-      <div class="user-logo-details-main" style="width: 70%">
+      <div class="user-logo-details-main" style="width: 90%">
         <div class="user-logo-details1">
           Hello Floyd Mullins
         </div>
@@ -42,14 +42,14 @@
     <div class="todo-list">
       <div v-if="tasks.length > 0" class="">
         <ul id="tasks-list">
-          <li class="task" v-for="(task, index) in tasks" :key="task.id" :index="index" contenteditable="true"  draggable="true" @dragstart="drag_start" @dragend="drag_end()" >
-            <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.9; color: #444; font-size: 18px; font-family: Helvitica; display: flex">
+          <li class="task" v-for="(task, index) in tasks" :key="task.id" :index="index" contenteditable="false"  draggable="true" @dragstart="drag_start" @dragend="drag_end()" >
+            <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.9; color: #444; font-size: 15px; font-family: Sans-serif; display: flex">
               <div class="" style="width:98%"> {{task.text}} </div>
               <div class="" style="width:2%">
                 <img width="16" height="16" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTE1LjEgNTE1LjEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxNS4xIDUxNS4xOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPGcgaWQ9ImFjY2Vzcy1hbGFybXMiPgoJCTxwYXRoIGQ9Ik01MTIuNTUsOTkuNDVMMzk1LjI1LDBMMzYyLjEsMzguMjVsMTE3LjMsOTkuNDVMNTEyLjU1LDk5LjQ1eiBNMTUzLDQwLjhMMTE5Ljg1LDIuNTVMMi41NSw5OS40NUwzNS43LDEzNy43TDE1Myw0MC44eiAgICAgTTI3MC4zLDE1OC4xaC0zOC4yNXYxNTNsMTE5Ljg1LDczLjk1MWwyMC40LTMwLjYwMmwtMTAyLTYxLjE5OVYxNTguMXogTTI1Ny41NSw1Ni4xYy0xMjcuNSwwLTIyOS41LDEwMi0yMjkuNSwyMjkuNSAgICBjMCwxMjcuNSwxMDIsMjI5LjUsMjI5LjUsMjI5LjVzMjI5LjUtMTAyLDIyOS41LTIyOS41QzQ4Ny4wNSwxNTguMSwzODUuMDUsNTYuMSwyNTcuNTUsNTYuMXogTTI1Ny41NSw0NjQuMSAgICBjLTk5LjQ1LDAtMTc4LjUtNzkuMDQ5LTE3OC41LTE3OC41YzAtOTkuNDUsNzkuMDUtMTc4LjUsMTc4LjUtMTc4LjVzMTc4LjUsNzkuMDUsMTc4LjUsMTc4LjUgICAgQzQzNi4wNSwzODUuMDUxLDM1Nyw0NjQuMSwyNTcuNTUsNDY0LjF6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
               </div>
             </div>
-            <div style="padding: 2px 0px 0px 20px; opacity: 0.9; font-weight:550; color: #bbb; font-size:16px;"> Due {{frontEndDateFormat(task.date)}} </div>
+            <div style="padding: 2px 0px 0px 20px; opacity: 0.9; font-weight:550; color: #bbb; font-size:14px;"> Due {{frontEndDateFormat(task.date)}} </div>
           </li>
         </ul>
       </div>
@@ -77,7 +77,7 @@ export default {
       deleteIcon: false,
       displayModel: false,
       taskData: '',
-      taskDate: '',
+      taskDate: new Date(),
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     }
@@ -162,16 +162,20 @@ export default {
 }
 
 .todo-list-main {
-  width: 40%;
+  width: 100%;
+  margin-left: -8px;
   /* align-content: center;
   text-align: center; */
   min-height: 100%;
   background-color: #fbfbfbaa;
   margin-top: -10px;
   position: absolute;
-  box-shadow: 0 2px 5px 0.8px #bebebe;
-  border-radius: 4px;
-  margin-left: 30%;
+  /* box-shadow: 0 2px 5px 0.8px #bebebe;
+  border-radius: 4px; */
+}
+
+ul {
+  width: 90%;
 }
 
 ul > li {
@@ -180,10 +184,11 @@ ul > li {
   margin-top: 10px;
   /* margin-left: -4%; */
   margin-bottom: 10px;
-  width: 90%;
+  width: 100%;
   background-color: #fefefeca;
   border-radius: 4px;
-  box-shadow: 0 2px 3px 0.2px #cfcfcf
+  box-shadow: 0 2px 2px 0.2px #c7c7c7;
+  font-size: 14px;
 }
 
 .task:hover {
@@ -199,7 +204,7 @@ ul > li {
   /* text-align: center; */
   /* align-content: center; */
   background-color: #fcfcfcaa;
-  padding: 20px 0px 15px 0px;
+  padding: 20px 0px 20px 0px;
   width: 100%;
   min-width: 100%;
   display: flex;
@@ -208,7 +213,6 @@ ul > li {
 .user-logo-details-main {
   margin-left: 4%;
   margin-top: 2%;
-  padding: 15px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
@@ -216,24 +220,24 @@ ul > li {
   /* margin-left: 1%; */
   /* padding: 5px; */
   font-weight: 550;
-  font-size: 22px;
+  font-size: 18px;
   font-family: sans-serif;
 }
 
 .user-logo-details2 {
   /* margin-left: 1%; */
-  padding: 5px 5px 5px 0px;
+  padding: 20px 0px 5px 0px;
   font-weight: 550;
-  font-size: 17px;
+  font-size: 16px;
   opacity: 0.6;
-  margin-top: 1.3%;
+  /* margin-top: 2%; */
   color: #333;
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif */
 }
 
 .user-logo {
-  margin-top: 3.5%;
-  margin-left: 6%;
+  margin-top: 2%;
+  margin-right: 2.5%;
   /* padding: 5px; */
   /* margin-top: 1.3%; */
 }
@@ -277,7 +281,7 @@ ul > li {
   margin: auto;
   padding: 0;
   border: 1px solid #888;
-  width: 40%;
+  width: 80%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -355,7 +359,7 @@ textarea:checked{
   cursor: not-allowed;
 }
 
-.disabled: :hover {
+.disabled:hover {
   cursor: not-allowed;
 }
 </style>
