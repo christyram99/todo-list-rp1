@@ -41,8 +41,8 @@
     </div>
     <div class="todo-list">
       <div v-if="tasks.length > 0" class="">
-        <ul >
-          <li class="task" v-for="(task, index) in tasks" :key="task.id" :index="index" contenteditable="false"  draggable="true" @dragstart="drag_start" @dragend="drag_end()" >
+        <div class="task-l">
+          <div class="task" v-for="(task, index) in tasks" :key="task.id" :index="index" contenteditable="false"  draggable="true" @dragstart="drag_start" @dragend="drag_end()" >
             <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.9; color: #444; font-size: 15px; font-family: Sans-serif; display: flex">
               <div class="" style="width:97%"> {{task.text}} </div>
               <div class="" style="width:3%">
@@ -50,8 +50,8 @@
               </div>
             </div>
             <div style="padding: 2px 0px 0px 20px; opacity: 0.9; font-weight:550; color: #bbb; font-size:14px;"> Due {{frontEndDateFormat(task.date)}} </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -173,19 +173,16 @@ export default {
   border-radius: 4px; */
 }
 
-ul {
-  /* width: 100%; */
-}
-
-ul > li {
+.task-l > div {
+  margin-left: 4%;
   list-style: none;
   padding: 10px 0px 20px 0px;
   margin-top: 10px;
   margin-bottom: 15px;
-  width: 95%;
-  background-color: #fefefeca;
+  width: 92%;
+  background-color: #fefefedd;
   border-radius: 4px;
-  box-shadow: 0 2px 2px 0.2px #c7c7c7;
+  box-shadow: 0 2px 2px 0.2px #e7e7e7ee;
   font-size: 14px;
 }
 
