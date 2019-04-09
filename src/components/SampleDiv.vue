@@ -3,7 +3,7 @@
      <div class="modal-content">
       <div class="modal-header">
         <span @click="closeModel()" class="close">&times;</span>
-        <h2>Modal Header</h2>
+        <h2>&nbsp;</h2>
       </div>
       <div class="modal-body">
         <textarea v-model="taskData" rows="7" resize="none" placeholder="What do you like to add" style="font-size: 14px; padding: 10px 10px 10px 10px; width: 95%; border:none;" >
@@ -42,7 +42,7 @@
     <div class="todo-list">
       <div v-if="tasks.length > 0" class="">
         <div class="task-l">
-          <!-- <div class="task" v-for="(task, index) in tasks" :key="task.id" :data-index="index"  draggable="true" @dragstart="drag_start" @dragend="drag_end" >
+          <div class="task" v-for="(task, index) in tasks" :key="task.id" :data-index="index"  draggable="true" @dragstart="drag_start" >
             <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.9; color: #444; font-size: 15px; font-family: Sans-serif; display: flex">
               <div class="" style="width:97%"> {{task.text}} </div>
               <div class="" style="width:3%">
@@ -50,23 +50,12 @@
               </div>
             </div>
             <div style="padding: 2px 0px 0px 20px; opacity: 0.9; font-weight:550; color: #bbb; font-size:14px;"> Due {{frontEndDateFormat(task.date)}} </div>
-          </div> -->
-          <div v-for="(task, index) in tasks" class="task" :key="task.id" :data-index="index" >
-            <draggable :sortable="true" @start="dragging=true, dragIndex=index" @end="dragging=false, drop2()">
-              <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.9; color: #444; font-size: 15px; font-family: Sans-serif; display: flex">
-                <div class="" style="width:97%"> {{task.text}} </div>
-                <div class="" style="width:3%">
-                  <img width="16" height="16" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTE1LjEgNTE1LjEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxNS4xIDUxNS4xOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPGcgaWQ9ImFjY2Vzcy1hbGFybXMiPgoJCTxwYXRoIGQ9Ik01MTIuNTUsOTkuNDVMMzk1LjI1LDBMMzYyLjEsMzguMjVsMTE3LjMsOTkuNDVMNTEyLjU1LDk5LjQ1eiBNMTUzLDQwLjhMMTE5Ljg1LDIuNTVMMi41NSw5OS40NUwzNS43LDEzNy43TDE1Myw0MC44eiAgICAgTTI3MC4zLDE1OC4xaC0zOC4yNXYxNTNsMTE5Ljg1LDczLjk1MWwyMC40LTMwLjYwMmwtMTAyLTYxLjE5OVYxNTguMXogTTI1Ny41NSw1Ni4xYy0xMjcuNSwwLTIyOS41LDEwMi0yMjkuNSwyMjkuNSAgICBjMCwxMjcuNSwxMDIsMjI5LjUsMjI5LjUsMjI5LjVzMjI5LjUtMTAyLDIyOS41LTIyOS41QzQ4Ny4wNSwxNTguMSwzODUuMDUsNTYuMSwyNTcuNTUsNTYuMXogTTI1Ny41NSw0NjQuMSAgICBjLTk5LjQ1LDAtMTc4LjUtNzkuMDQ5LTE3OC41LTE3OC41YzAtOTkuNDUsNzkuMDUtMTc4LjUsMTc4LjUtMTc4LjVzMTc4LjUsNzkuMDUsMTc4LjUsMTc4LjUgICAgQzQzNi4wNSwzODUuMDUxLDM1Nyw0NjQuMSwyNTcuNTUsNDY0LjF6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
-                </div>
-              </div>
-              <div style="padding: 2px 0px 0px 20px; opacity: 0.9; font-weight:550; color: #bbb; font-size:14px;"> Due {{frontEndDateFormat(task.date)}} </div>
-            </draggable>
           </div>
         </div>
       </div>
     </div>
-    <div class="stable-div">
-      <img v-if="dragging === true" title="drop a task here to delete" class="cursor" @drop="drop" @dragover="drag_over" width="74" height="72" src="https://cdn1.iconfinder.com/data/icons/round-ui/123/47-512.png" />
+    <div class="stable-div" @dragover="drag_over">
+      <div align="center" @drop="drop" @dragover="drag_over" style="width: 100%; align: center; text-aling: center; align-content: center;"><img v-if="dragging === true" title="drop a task here to delete" class="cursor" width="74" height="72" src="https://cdn1.iconfinder.com/data/icons/round-ui/123/47-512.png" /></div>
       <img v-if="dragging === false" title="click to add net task" @click="openModel()" class="cursor" width="64" height="64" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUwIDUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MCA1MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxjaXJjbGUgc3R5bGU9ImZpbGw6IzQzQjA1QzsiIGN4PSIyNSIgY3k9IjI1IiByPSIyNSIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIyNSIgeTE9IjEzIiB4Mj0iMjUiIHkyPSIzOCIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzNy41IiB5MT0iMjUiIHgyPSIxMi41IiB5Mj0iMjUiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
     </div>
   </div>
@@ -74,11 +63,9 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
-import draggable from 'vuedraggable'
 export default {
   components: {
-    Datepicker,
-    draggable
+    Datepicker
   },
   name: 'SampleDiv',
   data () {
@@ -92,22 +79,11 @@ export default {
       taskDate: new Date(),
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      dragIndex: 0,
-      deleteDrag: false
+      dragIndex: 0
     }
   },
   methods: {
-    addTask () {
-      console.log('called add task')
-      this.tasks.push({
-        id: this.taskId,
-        text: 'Task ' + (this.taskId + 1)
-      })
-
-      this.taskId++
-    },
     addTask2 () {
-      console.log('called add task2 ', this.taskDate)
       this.tasks.push({
         id: this.taskId,
         text: this.taskData,
@@ -118,32 +94,17 @@ export default {
       this.taskId++
     },
     drag_start (event) {
-      this.deleteIcon = true
-      console.log(' in drag start handler')
-      // event.addEventListner('onDrop', function () {
-      // })
-      // event.dataTransfer.setData('index', this.dragIndex)
+      this.dragging = true
+      event.dataTransfer.setData('text', event.target.getAttribute('data-index'))
     },
     drag_over (event) {
-      console.log(' in drag over handler')
       event.preventDefault()
     },
     drop (event) {
-      console.log('in drop ')
       event.preventDefault()
+      var index = event.dataTransfer.getData('text')
+      this.tasks.splice(index, 1)
       this.dragging = false
-      this.deleteDrag = true
-    },
-    drop2 () {
-      if (this.deleteDrag) {
-        let index = this.dragIndex
-        console.log('index ', index, this.dragIndex)
-        this.tasks.splice(index, 1)
-        this.deleteDrag = false
-      }
-    },
-    drag_end () {
-      this.deleteIcon = false
     },
     openModel () {
       this.displayModel = true
