@@ -1,12 +1,12 @@
 <template>
   <div v-if="displayModel" id="myModal" class="modal" :class="{block: displayModel}">
-     <div class="modal-content">
+     <div class="modal-content" style="width:100%">
       <div class="modal-header">
         <span @click="closeModel()" class="close">&times;</span>
         <h2>&nbsp;</h2>
       </div>
-      <div class="modal-body">
-        <textarea v-model="taskData" rows="7" resize="none" placeholder="What do you like to add" style="font-size: 14px; padding: 10px 10px 10px 10px; width: 95%; border:none;" >
+      <div class="modal-body" >
+        <textarea v-model="taskData" rows="10" resize="none" placeholder="What do you like to add" style="font-size: 14px; padding: 10px 10px 10px 10px; width: 95%; border:none;" >
         </textarea>
         <div style="right:15px; margin-top: -20px; position: absolute; float:right; margin-bottom:3px;">
           <!-- <datepicker>
@@ -17,8 +17,8 @@
           </datepicker>
         </div>
       </div>
-      <div class="modal-footer cursor" >
-        <button :disabled="!taskData || !taskDate" :class="{disabled : (!taskData || !taskDate), cursor: (taskData && taskDate)}" @click=addTask2() style="width:100%; padding: 12px; background-color: #428bca; border: none; font-size:20px; color: white;"> + </button>
+      <div class="modal-footer cursor" style="position: fixed; bottom:0; left: 0; right: 0" >
+        <button class="modal-footer-button" :disabled="!taskData || !taskDate" :class="{disabled : (!taskData || !taskDate), cursor: (taskData && taskDate)}" @click=addTask2() style="align: center; text-algin-center; width:100%; padding: 10px; background-color: #0F52BAEA; border: none; font-size:28px; font-weight: 550; color: white;"> + </button>
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@
     <div class="todo-list">
       <div v-if="tasks.length > 0" class="">
         <div class="task-l">
-          <div class="task" v-for="(task, index) in tasks" :key="task.id" :data-index="index"  draggable="true" @dragstart="drag_start" >
+          <div class="task" v-for="(task, index) in tasks" :key="task.id" :data-index="index"  draggable="true" @dragstart="drag_start" @dragend="drag_end" >
             <div style="padding: 7px 10px 10px 20px; font-weight: 550; opacity: 0.9; color: #444; font-size: 15px; font-family: Sans-serif; display: flex">
               <div class="" style="width:97%" contenteditable="true"> {{task.text}} </div>
               <div class="" style="width:3%">
@@ -55,8 +55,9 @@
       </div>
     </div>
     <div class="stable-div" @dragover="drag_over">
-      <div align="center" @drop="drop" @dragover="drag_over" style="width: 100%; align: center; text-aling: center; align-content: center;"><img v-if="dragging === true" title="drop a task here to delete" class="cursor" width="74" height="72" src="https://cdn1.iconfinder.com/data/icons/round-ui/123/47-512.png" /></div>
-      <img v-if="dragging === false" title="click to add net task" @click="openModel()" class="cursor" width="64" height="64" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUwIDUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MCA1MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxjaXJjbGUgc3R5bGU9ImZpbGw6IzQzQjA1QzsiIGN4PSIyNSIgY3k9IjI1IiByPSIyNSIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIyNSIgeTE9IjEzIiB4Mj0iMjUiIHkyPSIzOCIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzNy41IiB5MT0iMjUiIHgyPSIxMi41IiB5Mj0iMjUiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
+      <div align="center" @drop="drop" @dragover="drag_over" style="width: 100%; align: center; text-aling: center; align-content: center;"><img v-if="dragging === true" title="drop a task here to delete" class="cursor delete" width="72" height="72" src="https://cdn1.iconfinder.com/data/icons/round-ui/123/47-512.png" /></div>
+      <!-- <img v-if="dragging === false" title="click to add net task" @click="openModel()" class="cursor" width="64" height="64" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUwIDUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MCA1MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxjaXJjbGUgc3R5bGU9ImZpbGw6IzQzQjA1QzsiIGN4PSIyNSIgY3k9IjI1IiByPSIyNSIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIyNSIgeTE9IjEzIiB4Mj0iMjUiIHkyPSIzOCIvPgo8bGluZSBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzNy41IiB5MT0iMjUiIHgyPSIxMi41IiB5Mj0iMjUiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" /> -->
+      <img v-if="dragging === false" title="click to add net task" @click="openModel()" class="cursor" width="56" height="56" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTIgNTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUyIDUyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIGNsYXNzPSIiPjxnPjxwYXRoIGQ9Ik0yNiwwQzExLjY2NCwwLDAsMTEuNjYzLDAsMjZzMTEuNjY0LDI2LDI2LDI2czI2LTExLjY2MywyNi0yNlM0MC4zMzYsMCwyNiwweiBNMzguNSwyOEgyOHYxMWMwLDEuMTA0LTAuODk2LDItMiwyICBzLTItMC44OTYtMi0yVjI4SDEzLjVjLTEuMTA0LDAtMi0wLjg5Ni0yLTJzMC44OTYtMiwyLTJIMjRWMTRjMC0xLjEwNCwwLjg5Ni0yLDItMnMyLDAuODk2LDIsMnYxMGgxMC41YzEuMTA0LDAsMiwwLjg5NiwyLDIgIFMzOS42MDQsMjgsMzguNSwyOHoiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgc3R5bGU9ImZpbGw6IzBGNTJCQSIgZGF0YS1vbGRfY29sb3I9IiM4OTAwRkYiPjwvcGF0aD48L2c+IDwvc3ZnPg==" />
     </div>
   </div>
 </template>
@@ -99,6 +100,9 @@ export default {
     },
     drag_over (event) {
       event.preventDefault()
+    },
+    drag_end (event) {
+      this.dragging = false
     },
     drop (event) {
       event.preventDefault()
@@ -249,37 +253,103 @@ export default {
   left: 0;
   top: 0;
   width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  height: 100%;
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   /* margin-left: 1%; */
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.5s;
+  animation-name: animatetop;
+  animation-duration: 0.5s
 }
 
 /* Modal Content */
 .modal-content {
-  position: relative;
+  position: absolute;
   background-color: #fefefe;
-  margin: auto;
+  margin-top: 0;
+  top: 0;
+  /* top: 0 !important; */
   padding: 0;
   border: 1px solid #888;
-  width: 80%;
+  width: 100%;
+  height: 98%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
-  animation-duration: 0.4s
 }
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-  from {top:-300px; opacity:0};
+  from {opacity:0};
   to {top:0; opacity:1}
 }
 
 @keyframes animatetop {
-  from {top:-300px; opacity:0}
+  from { opacity:0}
   to {top:0; opacity:1}
+}
+
+/* Add Animation */
+@-webkit-keyframes animateExtend {
+  from {width:1%; opacity:1};
+  to {width: 50%; opacity:1}
+}
+
+@keyframes animateExtend {
+  from {width:1%; opacity:1};
+  to {width: 100%; opacity:1}
+}
+
+@-webkit-keyframes animateRotate {
+  from {
+    color: green;
+    opacity: 0.5;
+  };
+  to {
+    color: red;
+    opacity: 1;
+  }
+}
+
+@keyframes animateRotate {
+  0% {
+    opacity: 0.5;
+    transform: rotate(0deg);
+  };
+  100% {
+    opacity: 1;
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes animateExtend {
+  from {width:1%; opacity:1};
+  to {width: 100%; opacity:1}
+}
+
+@keyframes createBox {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes animateDelete {
+  from {
+    transform: scale(0.75);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.delete {
+  -webkit-animation-name: animateDelete;
+  -webkit-animation-duration: 0.5s;
+  animation-name: animateDelete;
+  animation-duration: 0.5s;
 }
 
 /* The Close Button */
@@ -288,6 +358,11 @@ export default {
   float: left;
   font-size: 28px;
   font-weight: bold;
+  transform: rotate(90deg);
+  -webkit-animation-name: animateRotate;
+  -webkit-animation-duration: 0.5s;
+  animation-name: animateRotate;
+  animation-duration: 0.5s;
 }
 
 .close:hover,
@@ -310,8 +385,15 @@ export default {
 
 .modal-footer {
   padding: 2px 16px;
-  background-color: #428bca;
+  /* background-color: #428bca; */
   color: white;
+}
+
+.modal-footer-button {
+  -webkit-animation-name: createBox;
+  -webkit-animation-duration: 0.4s;
+  animation-name: createBox;
+  animation-duration: 0.4s
 }
 
 .block {
